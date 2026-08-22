@@ -1,0 +1,82 @@
+-- H2 数据库建表脚本(MODE=MySQL 兼容 MySQL 语法)
+-- 幂等: 重复启动不会清空已有数据
+CREATE TABLE IF NOT EXISTS `user` (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(64) NOT NULL UNIQUE,
+  password VARCHAR(128) NOT NULL,
+  nickname VARCHAR(64),
+  role VARCHAR(32) NOT NULL,
+  avatar VARCHAR(255) DEFAULT '',
+  email VARCHAR(128),
+  phone VARCHAR(32),
+  status INT DEFAULT 1,
+  create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  update_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS category (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(64) NOT NULL,
+  parent_id INT DEFAULT 0,
+  sort INT DEFAULT 0,
+  create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  update_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS book (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(128) NOT NULL,
+  author VARCHAR(64),
+  isbn VARCHAR(32),
+  category_id INT,
+  publisher VARCHAR(64),
+  publish_date DATE,
+  price DECIMAL(10, 2),
+  stock INT DEFAULT 0,
+  total INT DEFAULT 0,
+  cover VARCHAR(255) DEFAULT '',
+  location VARCHAR(64),
+  description VARCHAR(1024),
+  status INT DEFAULT 1,
+  create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  update_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS reader (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(64) NOT NULL,
+  gender INT DEFAULT 0,
+  phone VARCHAR(32),
+  email VARCHAR(128),
+  id_card VARCHAR(32),
+  address VARCHAR(255),
+  register_date DATE,
+  status INT DEFAULT 1,
+  create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  update_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS borrow (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  book_id INT NOT NULL,
+  reader_id INT NOT NULL,
+  borrow_date DATE NOT NULL,
+  due_date DATE NOT NULL,
+  return_date DATE,
+  status INT DEFAULT 1,
+  create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  update_time DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS book_comment (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  book_id INT NOT NULL,
+  user_id INT NOT NULL,
+  rating INT DEFAULT 5 COMMENT '1-5星',
+  content VARCHAR(1024) NOT NULL,
+  status INT DEFAULT 0 COMMENT '0待审核 1通过 2驳回',
+  create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  update_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_book_id (book_id),
+  INDEX idx_status (status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

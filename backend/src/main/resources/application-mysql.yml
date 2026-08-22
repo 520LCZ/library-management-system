@@ -1,0 +1,28 @@
+# MySQL 环境配置(切换时使用 --spring.profiles.active=mysql)
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/library_db?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: your_password
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema-mysql.sql
+      continue-on-error: true
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: AUTO
+  mapper-locations: classpath*:/mapper/*.xml
+
+library:
+  covers-path: ${user.dir}/covers/
+
+jwt:
+  secret: library-management-system-super-secret-key-2026-must-be-long-enough-for-hs256
+  expire: 86400000

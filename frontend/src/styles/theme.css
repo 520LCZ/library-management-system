@@ -1,0 +1,125 @@
+/* 墨绿色主题: 通过 CSS 变量覆盖 Element Plus 默认蓝色主题 */
+
+:root {
+  /* 业务色板 (契约§5) */
+  --brand-primary: #2F5E4E;
+  --brand-primary-dark: #244A3D;
+  --brand-primary-light: #3E7A66;
+  --brand-bg: #F5F7F6;
+  --brand-card: #FFFFFF;
+  --brand-text-primary: #1F2D27;
+  --brand-text-secondary: #6B7B72;
+  --brand-border: #E3E8E4;
+  --brand-success: #3E7A66;
+  --brand-warning: #C98A2B;
+  --brand-danger: #B5482E;
+  --brand-info: #5A8F7B;
+
+  /* 覆盖 Element Plus 主色阶 (9 阶, Element Plus 通过这些变量生成按钮/链接/边框等颜色) */
+  --el-color-primary: #2F5E4E;
+  --el-color-primary-light-1: #3a6c5b;
+  --el-color-primary-light-2: #487969;
+  --el-color-primary-light-3: #5A8F7B;
+  --el-color-primary-light-4: #6da08e;
+  --el-color-primary-light-5: #82b1a2;
+  --el-color-primary-light-6: #96bfb1;
+  --el-color-primary-light-7: #abcdbf;
+  --el-color-primary-light-8: #c0dccd;
+  --el-color-primary-light-9: #e8f0ec;
+  --el-color-primary-dark-2: #264d3e;
+
+  /* 覆盖 Element Plus 语义色 (对齐契约) */
+  --el-color-success: #3E7A66;
+  --el-color-success-light-3: #6da08e;
+  --el-color-success-light-9: #e8f0ec;
+  --el-color-warning: #C98A2B;
+  --el-color-warning-light-3: #d9a558;
+  --el-color-warning-light-9: #f6ebda;
+  --el-color-danger: #B5482E;
+  --el-color-danger-light-3: #c4725a;
+  --el-color-danger-light-9: #f3e3de;
+  --el-color-info: #5A8F7B;
+  --el-color-info-light-3: #7ba899;
+  --el-color-info-light-9: #ecf2ef;
+
+  /* 全局背景/文字 */
+  --el-bg-color: #ffffff;
+  --el-text-color-primary: #1F2D27;
+  --el-text-color-regular: #1F2D27;
+  --el-text-color-secondary: #6B7B72;
+  --el-border-color: #E3E8E4;
+  --el-border-color-light: #E3E8E4;
+  --el-border-color-lighter: #E3E8E4;
+  --el-fill-color-light: #F5F7F6;
+  --el-fill-color-blank: #ffffff;
+}
+
+/* 全局 body 背景与文字 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--brand-bg);
+  color: var(--brand-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 通用卡片样式: 白底圆角阴影 */
+.g-card {
+  background: var(--brand-card);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px 0 rgba(31, 45, 39, 0.06);
+  border: 1px solid var(--brand-border);
+}
+
+/* 页面容器: 统一内边距 */
+.g-page {
+  padding: 16px;
+}
+
+/* 表格头部加深墨绿 */
+.el-table th.el-table__cell {
+  background: var(--brand-primary-light, #3E7A66) !important;
+  color: #fff !important;
+}
+
+/* 搜索栏间距 */
+.g-toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+/* KPI 卡片悬浮 */
+.kpi-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(31, 45, 39, 0.1);
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cdd8d2;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
